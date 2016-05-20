@@ -1,0 +1,56 @@
+{
+  "name": "blear.ui.date-select",
+  "version": "1.0.0",
+  "description": "有限日期选择 UI",
+  "scripts": {
+    "live": "browser-sync start --config bs-config.js"
+  },
+  "preferGlobal": false,
+  "bin": {},
+  "engines": {
+    "node": ">=1.0.0",
+    "iojs": ">=1.0.0"
+  },
+  "main": "src/index.js",
+  "keywords": [
+    "blear",
+    "ui",
+    "date",
+    "select",
+    "cloudcome",
+    "ydr.me"
+  ],
+  "author": {
+    "name": "cloudcome",
+    "email": "cloudcome@163.com",
+    "url": "http://ydr.me"
+  },
+  "contributors": [],
+  "homepage": "https://github.com/blearjs/blear.ui.date-select",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/blearjs/blear.ui.date-select"
+  },
+  "bugs": {
+    "url": "https://github.com/blearjs/blear.ui.date-select/issues"
+  },
+  "dependencies": {},
+  "peerDependencies": {
+    "blear.ui": "1.x",
+    "blear.utils.object": "1.x",
+    "blear.utils.date": "1.x",
+    "blear.utils.calendar": "1.x",
+    "blear.utils.array": "1.x",
+    "blear.utils.string": "1.x",
+    "blear.classes.template": "1.x",
+    "blear.core.selector": "1.x",
+    "blear.core.attribute": "1.x",
+    "blear.core.modification": "1.x",
+    "blear.core.layout": "1.x",
+    "blear.core.event": "1.x"
+  },
+  "devDependencies": {
+
+  },
+  "license": "MIT"
+}
