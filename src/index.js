@@ -74,7 +74,7 @@ var DateSelect = UI.extend({
     constructor: function (options) {
         var the = this;
 
-        the.Super();
+        DateSelect.parent(the);
         the[_options] = object.assign(true, {}, defaults, options);
         the[_containerEl] = selector.query(options.el)[0];
         the[_initData]();
@@ -90,7 +90,7 @@ var DateSelect = UI.extend({
         var the = this;
 
         event.un(the[_bodyEl]);
-        the.Super.destroy();
+        DateSelect.parent.destroy(the);
     }
 });
 var _options = DateSelect.sole();
