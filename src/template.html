@@ -1,21 +1,21 @@
-<div class="dkui-dateSelect" id="{{id}}">
-    <div class="dkui-dateSelect-header">
-        <!--<div class="dkui-dateSelect-header-nav">-->
-            <!--<div class="dkui-dateSelect-header-prev dkui-dateSelect-header-prev_disabled">〈</div>-->
-            <!--<div class="dkui-dateSelect-header-current">-->
-                <!--<div class="dkui-dateSelect-header-current-year">{{visibleYear}}</div>-->
-                <!--<div class="dkui-dateSelect-header-current-sep"></div>-->
-                <!--<div class="dkui-dateSelect-header-current-month">{{padStart(visibleMonth + 1, 2, '0')}}</div>-->
+<div class="blearui-dateSelect" id="{{id}}">
+    <div class="blearui-dateSelect-header">
+        <!--<div class="blearui-dateSelect-header-nav">-->
+            <!--<div class="blearui-dateSelect-header-prev blearui-dateSelect-header-prev_disabled">〈</div>-->
+            <!--<div class="blearui-dateSelect-header-current">-->
+                <!--<div class="blearui-dateSelect-header-current-year">{{visibleYear}}</div>-->
+                <!--<div class="blearui-dateSelect-header-current-sep"></div>-->
+                <!--<div class="blearui-dateSelect-header-current-month">{{padStart(visibleMonth + 1, 2, '0')}}</div>-->
             <!--</div>-->
-            <!--<div class="dkui-dateSelect-header-next dkui-dateSelect-header-next_disabled">〉</div>-->
+            <!--<div class="blearui-dateSelect-header-next blearui-dateSelect-header-next_disabled">〉</div>-->
         <!--</div>-->
-        <div class="dkui-dateSelect-header-weeks">
-            <div class="dkui-dateSelect-table">
-                <div class="dkui-dateSelect-tr">
-                    <div class="dkui-dateSelect-td dkui-dateSelect-header-week" @for="item in range(0, 6)">
-                        <div class="dkui-dateSelect-td-cell">
-                            <div class="dkui-dateSelect-td-cell-wrap">
-                                <div class="dkui-dateSelect-td-cell-inner">
+        <div class="blearui-dateSelect-header-weeks">
+            <div class="blearui-dateSelect-table">
+                <div class="blearui-dateSelect-tr">
+                    <div class="blearui-dateSelect-td blearui-dateSelect-header-week" @for="item in range(0, 6)">
+                        <div class="blearui-dateSelect-td-cell">
+                            <div class="blearui-dateSelect-td-cell-wrap">
+                                <div class="blearui-dateSelect-td-cell-inner">
                                     {{weeks[item]}}
                                 </div>
                             </div>
@@ -26,22 +26,22 @@
         </div>
     </div>
 
-    <div class="dkui-dateSelect-body">
-        <div class="dkui-dateSelect-table" @for="month in calendars">
-            <div class="dkui-dateSelect-caption">{{month[1][1].year}}年{{month[1][1].month + 1}}月</div>
-            <div class="dkui-dateSelect-tr" @for="week in month">
-                <div class="dkui-dateSelect-td" @class="dkui-dateSelect-td_disabled: date.prevMonth,
-                dkui-dateSelect-td_disabled: date.nextMonth,
-                dkui-dateSelect-td_candidacy: date.candidacy,
-                dkui-dateSelect-td_selected: selectedId == date.id"
+    <div class="blearui-dateSelect-body">
+        <div class="blearui-dateSelect-table" @for="month in calendars">
+            <div class="blearui-dateSelect-caption">{{month[1][1].year}}年{{month[1][1].month + 1}}月</div>
+            <div class="blearui-dateSelect-tr" @for="week in month">
+                <div class="blearui-dateSelect-td" @class="blearui-dateSelect-td_disabled: date.prevMonth,
+                blearui-dateSelect-td_disabled: date.nextMonth,
+                blearui-dateSelect-td_candidacy: date.candidacy,
+                blearui-dateSelect-td_selected: selectedId == date.id"
                         data-year="{{date.year}}"
                         data-month="{{date.month}}"
                         data-date="{{date.date}}"
                         data-id="{{date.id}}"
                         @for="date in week">
-                    <div class="dkui-dateSelect-td-cell">
-                        <div class="dkui-dateSelect-td-cell-wrap">
-                            <div class="dkui-dateSelect-td-cell-inner">
+                    <div class="blearui-dateSelect-td-cell">
+                        <div class="blearui-dateSelect-td-cell-wrap">
+                            <div class="blearui-dateSelect-td-cell-inner">
                                     {{date.date}}
                             </div>
                         </div>

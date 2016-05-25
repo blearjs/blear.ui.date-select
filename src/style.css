@@ -1,56 +1,56 @@
-.dkui-dateSelect {
+.blearui-dateSelect {
   position: relative;
   height: 100%;
   text-align: center; }
-  .dkui-dateSelect-header {
+  .blearui-dateSelect-header {
     position: absolute;
     overflow: hidden;
     top: 0;
     right: 0;
     left: 0; }
-    .dkui-dateSelect-header-weeks {
+    .blearui-dateSelect-header-weeks {
       border-top: 1px solid #ccc;
       border-bottom: 1px solid #ccc; }
-  .dkui-dateSelect-body {
+  .blearui-dateSelect-body {
     position: absolute;
     right: 0;
     bottom: 0;
     left: 0;
     overflow: auto;
     -webkit-overflow-scrolling: touch; }
-  .dkui-dateSelect-body .dkui-dateSelect-table {
+  .blearui-dateSelect-body .blearui-dateSelect-table {
     margin-bottom: 20px; }
-  .dkui-dateSelect-caption {
+  .blearui-dateSelect-caption {
     line-height: 30px;
     color: #666;
     font-size: 14px; }
-  .dkui-dateSelect-tr {
+  .blearui-dateSelect-tr {
     overflow: hidden; }
-  .dkui-dateSelect-td {
+  .blearui-dateSelect-td {
     position: relative;
     float: left;
     width: 14.28571%;
     padding-bottom: 14.28571%;
     font-size: 12px; }
-    .dkui-dateSelect-td_disabled {
+    .blearui-dateSelect-td_disabled {
       visibility: hidden; }
-    .dkui-dateSelect-td_candidacy .dkui-dateSelect-td-cell-inner {
+    .blearui-dateSelect-td_candidacy .blearui-dateSelect-td-cell-inner {
       background: #ddd;
       -webkit-border-radius: 100%;
       border-radius: 100%; }
-    .dkui-dateSelect-td_selected .dkui-dateSelect-td-cell-inner {
+    .blearui-dateSelect-td_selected .blearui-dateSelect-td-cell-inner {
       background: #444;
       color: #fff; }
-    .dkui-dateSelect-td-cell {
+    .blearui-dateSelect-td-cell {
       position: absolute;
       top: 0;
       right: 0;
       bottom: 0;
       left: 0; }
-      .dkui-dateSelect-td-cell-wrap {
+      .blearui-dateSelect-td-cell-wrap {
         display: table;
         width: 100%;
         height: 100%; }
-      .dkui-dateSelect-td-cell-inner {
+      .blearui-dateSelect-td-cell-inner {
         display: table-cell;
         vertical-align: middle; }
