@@ -54,3 +54,10 @@
       .blearui-dateSelect-td-cell-inner {
         display: table-cell;
         vertical-align: middle; }
+    .blearui-dateSelect-td-text {
+      position: relative; }
+      .blearui-dateSelect-td-text-date {
+        top: -3px;
+        font-size: 13px; }
+      .blearui-dateSelect-td-text-desc {
+        font-size: 11px; }

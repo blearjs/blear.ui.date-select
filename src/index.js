@@ -8,19 +8,19 @@
 
 'use strict';
 
-var UI =           require('blear.ui');
-var object =       require('blear.utils.object');
-var date =         require('blear.utils.date');
-var calendar =     require('blear.utils.calendar');
-var array =        require('blear.utils.array');
-var string =       require('blear.utils.string');
-var Template =     require('blear.classes.template');
-var selector =     require('blear.core.selector');
-var attribute =    require('blear.core.attribute');
+var UI = require('blear.ui');
+var object = require('blear.utils.object');
+var date = require('blear.utils.date');
+var calendar = require('blear.utils.calendar');
+var array = require('blear.utils.array');
+var string = require('blear.utils.string');
+var Template = require('blear.classes.template');
+var selector = require('blear.core.selector');
+var attribute = require('blear.core.attribute');
 var modification = require('blear.core.modification');
-var layout =       require('blear.core.layout');
-var event =        require('blear.core.event');
-var template =     require('./template.html', 'html');
+var layout = require('blear.core.layout');
+var event = require('blear.core.event');
+var template = require('./template.html', 'html');
 
 var namespace = UI.UI_CLASS + '-dateSelect';
 var gid = 0;
@@ -47,6 +47,15 @@ var defaults = {
     dates: [],
 
     /**
+     * 对应日期的描述
+     * ```
+     * [String]
+     * ```
+     * @type Array
+     */
+    descriptions: [],
+
+    /**
      * 一周的第一天星期几，默认为周日
      * @type Number
      */
@@ -56,18 +65,7 @@ var defaults = {
      * 隐藏今天以前的日期
      * @type Boolean
      */
-    hideBefore: true,
-
-    /**
-     * 滑动动画
-     * @param el
-     * @param to
-     * @param done
-     */
-    slideAnimation: function (el, to, done) {
-        attribute.style(el, to);
-        done();
-    }
+    hideBefore: true
 };
 var DateSelect = UI.extend({
     className: 'DateSelect',
@@ -136,10 +134,17 @@ pro[_initData] = function () {
     };
 
     var orderedDateList = [];
-    var candidacyIdMap = {};
+    var candidacyMap = {};
     var now = new Date();
     var nowMonthId = parseInt(date.id(now) / 100);
     var nowTime = now.getTime();
+    var descs = options.descriptions;
+
+    options.dates = options.dates || [];
+
+    if (!options.dates.length && typeof DEBUG !== 'undefined' && DEBUG === true) {
+        throw new TypeError('请至少指定一个日期');
+    }
 
     array.each(options.dates, function (index, d) {
         var dt = date.parse(d);
@@ -151,7 +156,7 @@ pro[_initData] = function () {
             return;
         }
 
-        candidacyIdMap[id] = true;
+        candidacyMap[id] = descs[index];
         orderedDateList.push(dt);
     });
 
@@ -177,9 +182,11 @@ pro[_initData] = function () {
         var monthCalendar = calendar.month(year, month, {
             firstDayInWeek: options.firstDayInWeek,
             filter: function (_d) {
-                if (candidacyIdMap[_d.id]) {
+                if (_d.id in candidacyMap) {
                     _d.candidacy = true;
                 }
+
+                _d.desc = candidacyMap[_d.id] || '';
             }
         });
 

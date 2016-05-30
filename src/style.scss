@@ -50,13 +50,13 @@
       visibility: hidden;
     }
 
-    &_candidacy &-cell-inner{
+    &_candidacy &-cell-inner {
       background: #ddd;
       -webkit-border-radius: 100%;
       border-radius: 100%;
     }
 
-    &_selected &-cell-inner{
+    &_selected &-cell-inner {
       background: #444;
       color: #fff;
     }
@@ -77,6 +77,19 @@
       &-inner {
         display: table-cell;
         vertical-align: middle;
+      }
+    }
+
+    &-text {
+      position: relative;
+
+      &-date {
+        top: -3px;
+        font-size: 13px;
+      }
+
+      &-desc {
+        font-size: 11px;
       }
     }
   }
