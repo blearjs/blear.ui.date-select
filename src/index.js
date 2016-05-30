@@ -180,7 +180,10 @@ pro[_initData] = function () {
             return;
         }
 
-        candidacyMap[id] = descs[index];
+        candidacyMap[id] = {
+            desc: descs[index],
+            index: index
+        };
         orderedDateList.push(dt);
     });
 
@@ -206,12 +209,17 @@ pro[_initData] = function () {
         var monthCalendar = calendar.month(year, month, {
             weeks: options.weeks,
             firstDayInWeek: options.firstDayInWeek,
-            filter: function (_d) {
-                if (_d.id in candidacyMap) {
-                    _d.candidacy = true;
-                }
+            filter: function (d) {
+                var candidacy = candidacyMap[d.id];
 
-                _d.desc = candidacyMap[_d.id] || '';
+                if (candidacy) {
+                    d.candidacy = true;
+                    d.desc = candidacy.desc || '';
+                    d.index = candidacy.index;
+                } else {
+                    d.desc = '';
+                    d.index = -1;
+                }
             }
         });
 
@@ -306,6 +314,7 @@ pro[_initEvent] = function () {
         var selectedYear = attribute.data(el, 'year');
         var selectedMonth = attribute.data(el, 'month');
         var selectedDate = attribute.data(el, 'date');
+        var selectedIndex = attribute.data(el, 'index');
         var selectedD = new Date(selectedYear, selectedMonth, selectedDate);
         var selectedId = date.id(selectedD);
 
@@ -314,7 +323,7 @@ pro[_initEvent] = function () {
         }
 
         data.selectedId = selectedId;
-        the.emit('select', selectedD);
+        the.emit('select', selectedD, selectedIndex * 1);
 
         array.each(els, function (index, el) {
             attribute.removeClass(el, selectedClassName);

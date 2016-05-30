@@ -3,8 +3,8 @@
   height: 100%;
   text-align: center; }
   .blearui-dateSelect-weeks {
-    border-top: 1px solid #ccc;
-    border-bottom: 1px solid #ccc; }
+    border-top: 1px solid #eee;
+    border-bottom: 1px solid #eee; }
   .blearui-dateSelect-nav {
     color: #888; }
     .blearui-dateSelect-nav * {
@@ -16,7 +16,7 @@
       text-align: center; }
       .blearui-dateSelect-nav-prev_disabled,
       .blearui-dateSelect-nav-next_disabled {
-        visibility: hidden; }
+        opacity: 0.3; }
   .blearui-dateSelect-body-list {
     margin: 0;
     padding: 0; }
@@ -67,4 +67,5 @@
         top: -3px;
         font-size: 13px; }
       .blearui-dateSelect-td-text-desc {
-        font-size: 11px; }
+        font-size: 11px;
+        min-height: 11px; }

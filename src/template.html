@@ -40,13 +40,14 @@
                             data-year="{{date.year}}"
                             data-month="{{date.month}}"
                             data-date="{{date.date}}"
+                            data-index="{{date.index}}"
                             data-id="{{date.id}}"
                             @for="date in week">
                         <div class="blearui-dateSelect-td-cell">
                             <div class="blearui-dateSelect-td-cell-wrap">
                                 <div class="blearui-dateSelect-td-cell-inner">
                                         <div class="blearui-dateSelect-td-text blearui-dateSelect-td-text-date">{{date.date}}</div>
-                                        <div @if="date.thisMonth" class="blearui-dateSelect-td-text blearui-dateSelect-td-text-desc">{{date.desc}}</div>
+                                        <div class="blearui-dateSelect-td-text blearui-dateSelect-td-text-desc">{{ date.thisMonth ? date.desc : ""}}</div>
                                 </div>
                             </div>
                         </div>

@@ -8,8 +8,8 @@
   }
 
   &-weeks {
-    border-top: 1px solid #ccc;
-    border-bottom: 1px solid #ccc;
+    border-top: 1px solid #eee;
+    border-bottom: 1px solid #eee;
   }
 
   &-nav {
@@ -26,7 +26,7 @@
       text-align: center;
 
       &_disabled {
-        visibility: hidden;
+        opacity: 0.3;
       }
     }
   }
@@ -114,6 +114,7 @@
 
       &-desc {
         font-size: 11px;
+        min-height: 11px;
       }
     }
   }
