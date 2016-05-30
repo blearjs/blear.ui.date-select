@@ -78,7 +78,13 @@ var defaults = {
      * 隐藏非本月日期
      * @type Boolean
      */
-    hideNotMonth: false
+    hideNotMonth: false,
+
+    /**
+     * 滚动动画函数
+     * @type Function|undefined
+     */
+    slideAnimation: undefined
 };
 var DateSelect = UI.extend({
     className: 'DateSelect',
@@ -269,7 +275,8 @@ pro[_initNode] = function () {
         width: layout.outerWidth(the[_bodyEl]),
         height: layout.outerHeight(the[_bodyEl]) / the[_data].length,
         loop: false,
-        auto: false
+        auto: false,
+        slideAnimation: options.slideAnimation
     });
 
     var headerHeight = layout.outerHeight(the[_headerEl]);
