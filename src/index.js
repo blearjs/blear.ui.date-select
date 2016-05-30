@@ -9,6 +9,7 @@
 'use strict';
 
 var UI = require('blear.ui');
+var Slider = require('blear.ui.slider');
 var object = require('blear.utils.object');
 var date = require('blear.utils.date');
 var calendar = require('blear.utils.calendar');
@@ -56,6 +57,12 @@ var defaults = {
     descriptions: [],
 
     /**
+     * 每月显示的周数
+     * @type Number
+     */
+    weeks: 6,
+
+    /**
      * 一周的第一天星期几，默认为周日
      * @type Number
      */
@@ -65,7 +72,13 @@ var defaults = {
      * 隐藏今天以前的日期
      * @type Boolean
      */
-    hideBefore: true
+    hideBefore: true,
+
+    /**
+     * 隐藏非本月日期
+     * @type Boolean
+     */
+    hideNotMonth: false
 };
 var DateSelect = UI.extend({
     className: 'DateSelect',
@@ -103,6 +116,7 @@ var _bodyEl = DateSelect.sole();
 var _yearEl = DateSelect.sole();
 var _monthEl = DateSelect.sole();
 var _data = DateSelect.sole();
+var _slider = DateSelect.sole();
 var pro = DateSelect.prototype;
 
 
@@ -130,7 +144,8 @@ pro[_initData] = function () {
         visibleYear: 0,
         visibleMonth: 0,
         visibleIndex: 0,
-        orderedMonthList: null
+        orderedMonthList: [],
+        length: 0
     };
 
     var orderedDateList = [];
@@ -180,6 +195,7 @@ pro[_initData] = function () {
         orderedMonthList.push(d);
 
         var monthCalendar = calendar.month(year, month, {
+            weeks: options.weeks,
             firstDayInWeek: options.firstDayInWeek,
             filter: function (_d) {
                 if (_d.id in candidacyMap) {
@@ -218,6 +234,7 @@ pro[_initData] = function () {
     });
 
     the[_data].orderedMonthList = orderedMonthList;
+    the[_data].length = orderedMonthList.length;
     the[_data].visibleIndex = foundIndex;
     the[_data].visibleYear = foundMonthDate.getFullYear();
     the[_data].visibleMonth = foundMonthDate.getMonth();
@@ -232,18 +249,25 @@ pro[_initNode] = function () {
     var options = the[_options];
     var tpl = new Template(template, {
         methods: {
-            range: array.range,
-            padStart: string.padStart
-        }
+            range: array.range
+        },
+        options: options
     });
 
     the[_containerEl].innerHTML = tpl.render(the[_data]);
     the[_headerEl] = selector.query('.' + namespace + '-header', the[_containerEl])[0];
-    the[_prevEl] = selector.query('.' + namespace + '-header-prev', the[_containerEl])[0];
-    the[_nextEl] = selector.query('.' + namespace + '-header-next', the[_containerEl])[0];
+    the[_prevEl] = selector.query('.' + namespace + '-nav-prev', the[_containerEl])[0];
+    the[_nextEl] = selector.query('.' + namespace + '-nav-next', the[_containerEl])[0];
     the[_bodyEl] = selector.query('.' + namespace + '-body', the[_containerEl])[0];
-    the[_yearEl] = selector.query('.' + namespace + '-header-current-year', the[_containerEl])[0];
-    the[_monthEl] = selector.query('.' + namespace + '-header-current-month', the[_containerEl])[0];
+    the[_yearEl] = selector.query('.' + namespace + '-nav-current-year', the[_containerEl])[0];
+    the[_monthEl] = selector.query('.' + namespace + '-nav-current-month', the[_containerEl])[0];
+    the[_slider] = new Slider({
+        el: the[_bodyEl],
+        width: layout.outerWidth(the[_bodyEl]),
+        height: layout.outerHeight(the[_bodyEl]) / the[_data].length,
+        loop: false,
+        auto: false
+    });
 
     var headerHeight = layout.outerHeight(the[_headerEl]);
     attribute.style(the[_bodyEl], 'top', headerHeight);
@@ -255,10 +279,14 @@ pro[_initNode] = function () {
  */
 pro[_initEvent] = function () {
     var the = this;
-    var className = '.' + namespace + '-td_candidacy';
+    var classNameSelector = '.' + namespace + '-td_candidacy';
     var selectedClassName = namespace + '-td_selected';
-    var els = selector.query(className, the[_containerEl]);
+    var els = selector.query(classNameSelector, the[_containerEl]);
     var data = the[_data];
+    var prevClass = namespace + '-nav-prev';
+    var nextClass = namespace + '-nav-next';
+    var prevDisabled = prevClass + '_disabled';
+    var nextDisabled = nextClass + '_disabled';
 
     /**
      * 选中单元格
@@ -285,7 +313,48 @@ pro[_initEvent] = function () {
         attribute.addClass(el, selectedClassName);
     };
 
-    event.on(the[_bodyEl], 'click', className, function () {
+    the[_slider].on('afterSlide', function (index) {
+        var d = data.orderedMonthList[index];
+        var y = d.getFullYear();
+        var m = d.getMonth() + 1;
+
+        if (index === 0) {
+            attribute.addClass(the[_prevEl], prevDisabled);
+        } else {
+            attribute.removeClass(the[_prevEl], prevDisabled);
+        }
+
+        if (index === data.length - 1) {
+            attribute.addClass(the[_nextEl], nextDisabled);
+        } else {
+            attribute.removeClass(the[_nextEl], nextDisabled);
+        }
+
+        the[_yearEl].innerHTML = y + '年';
+        the[_monthEl].innerHTML = m + '年';
+    });
+
+    the[_slider].tap(classNameSelector, function () {
+        selectTd(this);
+    });
+
+    the[_slider].tap('.' + prevClass, function () {
+        the[_slider].prev();
+    });
+
+    the[_slider].tap('.' + nextClass, function () {
+        the[_slider].next();
+    });
+
+    event.on(the[_prevEl], 'click', function () {
+        the[_slider].prev();
+    });
+
+    event.on(the[_nextEl], 'click', function () {
+        the[_slider].next();
+    });
+
+    event.on(the[_bodyEl], 'click', classNameSelector, function () {
         selectTd(this);
     });
 };

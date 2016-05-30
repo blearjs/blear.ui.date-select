@@ -2,24 +2,28 @@
   position: relative;
   height: 100%;
   text-align: center; }
-  .blearui-dateSelect-header {
-    position: absolute;
-    overflow: hidden;
-    top: 0;
-    right: 0;
-    left: 0; }
-    .blearui-dateSelect-header-weeks {
-      border-top: 1px solid #ccc;
-      border-bottom: 1px solid #ccc; }
-  .blearui-dateSelect-body {
-    position: absolute;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    overflow: auto;
-    -webkit-overflow-scrolling: touch; }
-  .blearui-dateSelect-body .blearui-dateSelect-table {
-    margin-bottom: 20px; }
+  .blearui-dateSelect-weeks {
+    border-top: 1px solid #ccc;
+    border-bottom: 1px solid #ccc; }
+  .blearui-dateSelect-nav {
+    color: #888; }
+    .blearui-dateSelect-nav * {
+      display: inline-block;
+      line-height: 40px; }
+    .blearui-dateSelect-nav-prev,
+    .blearui-dateSelect-nav-next {
+      width: 40px;
+      text-align: center; }
+      .blearui-dateSelect-nav-prev_disabled,
+      .blearui-dateSelect-nav-next_disabled {
+        visibility: hidden; }
+  .blearui-dateSelect-body-list {
+    margin: 0;
+    padding: 0; }
+    .blearui-dateSelect-body-list li {
+      list-style: none;
+      margin: 0;
+      padding: 0; }
   .blearui-dateSelect-caption {
     line-height: 30px;
     color: #666;
@@ -32,8 +36,11 @@
     width: 14.28571%;
     padding-bottom: 14.28571%;
     font-size: 12px; }
-    .blearui-dateSelect-td_disabled {
+    .blearui-dateSelect-td_hidden {
       visibility: hidden; }
+    .blearui-dateSelect-td_prevMonth,
+    .blearui-dateSelect-td_nextMonth {
+      color: #aaa; }
     .blearui-dateSelect-td_candidacy .blearui-dateSelect-td-cell-inner {
       background: #ddd;
       -webkit-border-radius: 100%;

@@ -1,15 +1,14 @@
 <div class="blearui-dateSelect" id="{{id}}">
     <div class="blearui-dateSelect-header">
-        <!--<div class="blearui-dateSelect-header-nav">-->
-            <!--<div class="blearui-dateSelect-header-prev blearui-dateSelect-header-prev_disabled">〈</div>-->
-            <!--<div class="blearui-dateSelect-header-current">-->
-                <!--<div class="blearui-dateSelect-header-current-year">{{visibleYear}}</div>-->
-                <!--<div class="blearui-dateSelect-header-current-sep"></div>-->
-                <!--<div class="blearui-dateSelect-header-current-month">{{padStart(visibleMonth + 1, 2, '0')}}</div>-->
-            <!--</div>-->
-            <!--<div class="blearui-dateSelect-header-next blearui-dateSelect-header-next_disabled">〉</div>-->
-        <!--</div>-->
-        <div class="blearui-dateSelect-header-weeks">
+        <div class="blearui-dateSelect-nav">
+            <div class="blearui-dateSelect-nav-prev blearui-dateSelect-nav-prev_disabled">〈</div>
+            <div class="blearui-dateSelect-nav-current">
+                <div class="blearui-dateSelect-nav-current-year"></div>
+                <div class="blearui-dateSelect-nav-current-month"></div>
+            </div>
+            <div class="blearui-dateSelect-nav-next blearui-dateSelect-nav-next_disabled">〉</div>
+        </div>
+        <div class="blearui-dateSelect-weeks">
             <div class="blearui-dateSelect-table">
                 <div class="blearui-dateSelect-tr">
                     <div class="blearui-dateSelect-td blearui-dateSelect-header-week" @for="item in range(0, 6)">
@@ -27,28 +26,33 @@
     </div>
 
     <div class="blearui-dateSelect-body">
-        <div class="blearui-dateSelect-table" @for="month in calendars">
-            <div class="blearui-dateSelect-caption">{{month[1][1].year}}年{{month[1][1].month + 1}}月</div>
-            <div class="blearui-dateSelect-tr" @for="week in month">
-                <div class="blearui-dateSelect-td" @class="blearui-dateSelect-td_disabled: date.prevMonth,
-                blearui-dateSelect-td_disabled: date.nextMonth,
-                blearui-dateSelect-td_candidacy: date.candidacy,
-                blearui-dateSelect-td_selected: selectedId == date.id"
-                        data-year="{{date.year}}"
-                        data-month="{{date.month}}"
-                        data-date="{{date.date}}"
-                        data-id="{{date.id}}"
-                        @for="date in week">
-                    <div class="blearui-dateSelect-td-cell">
-                        <div class="blearui-dateSelect-td-cell-wrap">
-                            <div class="blearui-dateSelect-td-cell-inner">
-                                    <div class="blearui-dateSelect-td-text blearui-dateSelect-td-text-date">{{date.date}}</div>
-                                    <div class="blearui-dateSelect-td-text blearui-dateSelect-td-text-desc">{{date.desc}}</div>
+        <ul class="blearui-dateSelect-body-list">
+            <li class="blearui-dateSelect-table" @for="month in calendars">
+                <!--<div class="blearui-dateSelect-caption">{{month[1][1].year}}年{{month[1][1].month + 1}}月</div>-->
+                <div class="blearui-dateSelect-tr" @for="week in month">
+                    <div class="blearui-dateSelect-td" @class="blearui-dateSelect-td_hidden: options.hideNotMonth && date.prevMonth,
+                    blearui-dateSelect-td_hidden: options.hideNotMonth && date.nextMonth,
+                    blearui-dateSelect-td_thisMonth: date.thisMonth,
+                    blearui-dateSelect-td_prevMonth: date.prevMonth,
+                    blearui-dateSelect-td_nextMonth: date.nextMonth,
+                    blearui-dateSelect-td_candidacy: date.thisMonth && date.candidacy,
+                    blearui-dateSelect-td_selected: selectedId == date.id"
+                            data-year="{{date.year}}"
+                            data-month="{{date.month}}"
+                            data-date="{{date.date}}"
+                            data-id="{{date.id}}"
+                            @for="date in week">
+                        <div class="blearui-dateSelect-td-cell">
+                            <div class="blearui-dateSelect-td-cell-wrap">
+                                <div class="blearui-dateSelect-td-cell-inner">
+                                        <div class="blearui-dateSelect-td-text blearui-dateSelect-td-text-date">{{date.date}}</div>
+                                        <div @if="date.thisMonth" class="blearui-dateSelect-td-text blearui-dateSelect-td-text-desc">{{date.desc}}</div>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
+            </li>
+        </ul>
     </div>
 </div>

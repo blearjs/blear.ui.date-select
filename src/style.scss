@@ -4,29 +4,44 @@
   text-align: center;
 
   &-header {
-    position: absolute;
-    overflow: hidden;
-    top: 0;
-    right: 0;
-    left: 0;
 
-    &-weeks {
-      border-top: 1px solid #ccc;
-      border-bottom: 1px solid #ccc;
+  }
+
+  &-weeks {
+    border-top: 1px solid #ccc;
+    border-bottom: 1px solid #ccc;
+  }
+
+  &-nav {
+    color: #888;
+
+    * {
+      display: inline-block;
+      line-height: 40px;
+    }
+
+    &-prev,
+    &-next {
+      width: 40px;
+      text-align: center;
+
+      &_disabled {
+        visibility: hidden;
+      }
     }
   }
 
   &-body {
-    position: absolute;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    overflow: auto;
-    -webkit-overflow-scrolling: touch;
-  }
+    &-list {
+      margin: 0;
+      padding: 0;
 
-  &-body &-table {
-    margin-bottom: 20px;
+      li {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+      }
+    }
   }
 
   &-caption {
@@ -46,8 +61,17 @@
     padding-bottom: percentage(1/7);
     font-size: 12px;
 
-    &_disabled {
+    &_hidden {
       visibility: hidden;
+    }
+
+    &_thisMonth {
+
+    }
+
+    &_prevMonth,
+    &_nextMonth {
+      color: #aaa;
     }
 
     &_candidacy &-cell-inner {
