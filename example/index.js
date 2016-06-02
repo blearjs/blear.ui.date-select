@@ -12,13 +12,15 @@ var DateSelect = require('../src/index');
 
 var ds = new DateSelect({
     el: '#demo',
+    active: 6,
     dates: [
         [2016, 3, 20],
         [2016, 4, 30],
         [2016, 4, 31],
         [2016, 5, 1],
         [2016, 5, 5],
-        [2016, 5, 9]
+        [2016, 5, 9],
+        [2019, 0, 1]
     ],
     descriptions: [
         '¥2300',

@@ -48,6 +48,12 @@ var defaults = {
     dates: [],
 
     /**
+     * 指定高亮
+     * @type Number
+     */
+    active: -1,
+
+    /**
      * 对应日期的描述
      * ```
      * [String]
@@ -174,6 +180,10 @@ pro[_initData] = function () {
         var dt = date.parse(d);
         var id = date.id(dt);
         var monthId = parseInt(id / 100);
+
+        if (index === options.active) {
+            the[_data].selectedId = id;
+        }
 
         // 隐藏当月以前
         if (options.hideBefore && monthId < nowMonthId) {
@@ -323,7 +333,7 @@ pro[_initEvent] = function () {
         }
 
         data.selectedId = selectedId;
-        the.emit('select', selectedD, selectedIndex * 1);
+        the.emit('select', selectedIndex * 1, selectedD);
 
         array.each(els, function (index, el) {
             attribute.removeClass(el, selectedClassName);

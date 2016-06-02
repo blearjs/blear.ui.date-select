@@ -36,7 +36,7 @@
                     blearui-dateSelect-td_prevMonth: date.prevMonth,
                     blearui-dateSelect-td_nextMonth: date.nextMonth,
                     blearui-dateSelect-td_candidacy: date.thisMonth && date.candidacy,
-                    blearui-dateSelect-td_selected: selectedId == date.id"
+                    blearui-dateSelect-td_selected: date.thisMonth && date.candidacy && selectedId == date.id"
                             data-year="{{date.year}}"
                             data-month="{{date.month}}"
                             data-date="{{date.date}}"
