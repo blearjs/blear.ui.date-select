@@ -192,7 +192,7 @@ pro[_initData] = function () {
         }
 
         // 隐藏今天以前
-        if (options.hideBefore && id < nowId) {
+        if (options.hideBefore && id <= nowId) {
             return;
         }
 
