@@ -366,7 +366,7 @@ pro[_initEvent] = function () {
         }
 
         the[_yearEl].innerHTML = y + '年';
-        the[_monthEl].innerHTML = m + '年';
+        the[_monthEl].innerHTML = m + '月';
     });
 
     the[_slider].tap(classNameSelector, function () {
