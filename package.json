@@ -1,7 +1,7 @@
 {
 
   "name": "blear.ui.date-select",
-  "version": "1.0.11",
+  "version": "1.0.12",
   "description": "有限日期选择 UI",
   "scripts": {
     "live": "browser-sync start --config bs-config.js"

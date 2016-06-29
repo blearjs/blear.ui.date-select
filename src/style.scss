@@ -8,7 +8,6 @@
   }
 
   &-weeks {
-    border-top: 1px solid #eee;
     border-bottom: 1px solid #eee;
   }
 
@@ -52,6 +51,7 @@
 
   &-tr {
     overflow: hidden;
+    padding: 1px 0;
   }
 
   &-td {
@@ -69,19 +69,24 @@
 
     }
 
-    &_prevMonth,
-    &_nextMonth {
-      color: #aaa;
+    &_prevMonth &-text,
+    &_nextMonth &-text {
+      color: #ccc;
     }
 
     &_candidacy &-cell-inner {
-      background: #ddd;
       -webkit-border-radius: 100%;
       border-radius: 100%;
+      border: 1px solid #e4e4e4;
     }
 
     &_selected &-cell-inner {
-      background: #444;
+      background: #dcc59e;
+      color: #fff;
+    }
+
+    &_selected &-text_date,
+    &_selected &-text_desc {
       color: #fff;
     }
 
@@ -107,14 +112,17 @@
     &-text {
       position: relative;
 
-      &-date {
-        top: -3px;
-        font-size: 13px;
+      &_date {
+        top: 0;
+        font-size: 16px;
+        color: #888;
       }
 
-      &-desc {
-        font-size: 11px;
-        min-height: 11px;
+      &_desc {
+        font-size: 12px;
+        min-height: 12px;
+        transform: scale(0.8);
+        color: #d5b681;
       }
     }
   }
