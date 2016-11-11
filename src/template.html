@@ -46,8 +46,11 @@
                         <div class="blearui-dateSelect-td-cell">
                             <div class="blearui-dateSelect-td-cell-wrap">
                                 <div class="blearui-dateSelect-td-cell-inner">
-                                        <div class="blearui-dateSelect-td-text blearui-dateSelect-td-text_date">{{date.date}}</div>
-                                        <div class="blearui-dateSelect-td-text blearui-dateSelect-td-text_desc">{{ date.thisMonth ? date.desc : ""}}</div>
+                                    <div class="blearui-dateSelect-td-text blearui-dateSelect-td-text_date">{{date.date}}</div>
+                                    <div @if="date.desc" class="blearui-dateSelect-td-text blearui-dateSelect-td-text_desc" @for="item in date.desc">{{ date.thisMonth ? item : ""}}</div>
+                                    <div @if="!date.desc">
+                                        <div class="blearui-dateSelect-td-text blearui-dateSelect-td-text_desc" @for="item in descArr"></div>
+                                    </div>
                                 </div>
                             </div>
                         </div>

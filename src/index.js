@@ -271,6 +271,7 @@ pro[_initData] = function () {
     the[_data].visibleIndex = foundIndex;
     the[_data].visibleYear = foundMonthDate.getFullYear();
     the[_data].visibleMonth = foundMonthDate.getMonth();
+    the[_data].descArr = new Array(descs[0].length);
 };
 
 
