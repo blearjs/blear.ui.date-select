@@ -15,12 +15,14 @@ var date = require('blear.utils.date');
 var calendar = require('blear.utils.calendar');
 var array = require('blear.utils.array');
 var string = require('blear.utils.string');
+var typeis = require('blear.utils.typeis');
 var Template = require('blear.classes.template');
 var selector = require('blear.core.selector');
 var attribute = require('blear.core.attribute');
 var modification = require('blear.core.modification');
 var layout = require('blear.core.layout');
 var event = require('blear.core.event');
+
 var template = require('./template.html', 'html');
 
 var namespace = UI.UI_CLASS + '-dateSelect';
@@ -170,6 +172,7 @@ pro[_initData] = function () {
     var nowTime = now.getTime();
     var nowId = date.id(now);
     var descs = options.descriptions;
+    var descLength = descs[0].length;
 
     options.dates = options.dates || [];
 
@@ -196,8 +199,14 @@ pro[_initData] = function () {
             return;
         }
 
+        var desc = descs[index];
+
+        if (!typeis.Array(desc)) {
+            desc = [desc];
+        }
+
         candidacyMap[id] = {
-            desc: descs[index],
+            desc: desc,
             index: index
         };
         orderedDateList.push(dt);
@@ -230,10 +239,10 @@ pro[_initData] = function () {
 
                 if (candidacy) {
                     d.candidacy = true;
-                    d.desc = candidacy.desc || '';
+                    d.desc = candidacy.desc || new Array(descLength);
                     d.index = candidacy.index;
                 } else {
-                    d.desc = '';
+                    d.desc = null;
                     d.index = -1;
                 }
             }
@@ -271,7 +280,7 @@ pro[_initData] = function () {
     the[_data].visibleIndex = foundIndex;
     the[_data].visibleYear = foundMonthDate.getFullYear();
     the[_data].visibleMonth = foundMonthDate.getMonth();
-    the[_data].descArr = new Array(descs[0].length);
+    the[_data].descArr = new Array(descLength);
 };
 
 
