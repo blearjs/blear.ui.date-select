@@ -106,8 +106,21 @@ var DateSelect = UI.extend({
         the[_initNode]();
         the[_initEvent]();
     },
+    /**
+     * 跳转到对应视图
+     * @param orderedMonthList
+     */
+    jumpView: function (orderedMonthList) {
+        var the = this;
+        var options = the[_options];
+        var dt = date.parse(options.dates[options.active]);
 
-
+        array.each(orderedMonthList, function (index, el) {
+            if(el.getFullYear() === dt.getFullYear() && el.getMonth() === dt.getMonth()) {
+                the[_slider].go(index);
+            }
+        });
+    },
     /**
      * 销毁实例
      */
@@ -357,6 +370,11 @@ pro[_initEvent] = function () {
 
         attribute.addClass(el, selectedClassName);
     };
+
+    /**
+     *  跳转到对应视图
+     */
+    the.jumpView(data.orderedMonthList);
 
     the[_slider].on('afterSlide', function (index) {
         var d = data.orderedMonthList[index];
