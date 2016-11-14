@@ -106,21 +106,7 @@ var DateSelect = UI.extend({
         the[_initNode]();
         the[_initEvent]();
     },
-    /**
-     * 跳转到对应视图
-     * @param orderedMonthList
-     */
-    jumpView: function (orderedMonthList) {
-        var the = this;
-        var options = the[_options];
-        var dt = date.parse(options.dates[options.active]);
 
-        array.each(orderedMonthList, function (index, el) {
-            if(el.getFullYear() === dt.getFullYear() && el.getMonth() === dt.getMonth()) {
-                the[_slider].go(index);
-            }
-        });
-    },
     /**
      * 销毁实例
      */
@@ -147,6 +133,7 @@ var _yearEl = DateSelect.sole();
 var _monthEl = DateSelect.sole();
 var _data = DateSelect.sole();
 var _slider = DateSelect.sole();
+var _jumpView = DateSelect.sole();
 var pro = DateSelect.prototype;
 
 
@@ -371,10 +358,8 @@ pro[_initEvent] = function () {
         attribute.addClass(el, selectedClassName);
     };
 
-    /**
-     *  跳转到对应视图
-     */
-    the.jumpView(data.orderedMonthList);
+    // 跳转到高亮月份的对应视图
+    the[_jumpView](data.orderedMonthList);
 
     the[_slider].on('afterSlide', function (index) {
         var d = data.orderedMonthList[index];
@@ -422,6 +407,21 @@ pro[_initEvent] = function () {
     });
 };
 
+/**
+ * 跳转到对应视图
+ * @param orderedMonthList
+ */
+pro[_jumpView] = function (orderedMonthList) {
+    var the = this;
+    var options = the[_options];
+    var dt = date.parse(options.dates[options.active]);
+
+    array.each(orderedMonthList, function (index, el) {
+        if (el.getFullYear() === dt.getFullYear() && el.getMonth() === dt.getMonth()) {
+            the[_slider].go(index);
+        }
+    });
+};
 
 require('./style.css', 'css|style');
 DateSelect.defaults = defaults;
