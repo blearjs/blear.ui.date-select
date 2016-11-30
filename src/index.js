@@ -117,7 +117,7 @@ var DateSelect = UI.extend({
         event.un(the[_prevEl]);
         event.un(the[_nextEl]);
         the[_slider].destroy();
-        DateSelect.parent.destroy(the);
+        DateSelect.invoke('destroy', the);
     }
 });
 var _options = DateSelect.sole();
