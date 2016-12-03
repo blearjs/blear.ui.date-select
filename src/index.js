@@ -172,7 +172,7 @@ pro[_initData] = function () {
     var nowTime = now.getTime();
     var nowId = date.id(now);
     var descs = options.descriptions;
-    var descLength = descs[0].length;
+    var descLength = typeis.Array(descs[0]) ? descs[0].length : 1;
 
     options.dates = options.dates || [];
 
