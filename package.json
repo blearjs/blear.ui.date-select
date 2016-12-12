@@ -1,7 +1,7 @@
 {
 
   "name": "blear.ui.date-select",
-  "version": "1.0.17",
+  "version": "1.0.18",
   "description": "有限日期选择 UI",
   "scripts": {
     "live": "browser-sync start --config bs-config.js"
@@ -44,6 +44,7 @@
     "blear.utils.calendar": "1.x",
     "blear.utils.array": "1.x",
     "blear.utils.string": "1.x",
+    "blear.utils.time": "1.x",
     "blear.classes.template": "1.x",
     "blear.core.selector": "1.x",
     "blear.core.attribute": "1.x",

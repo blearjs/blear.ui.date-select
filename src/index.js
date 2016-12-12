@@ -16,6 +16,7 @@ var calendar = require('blear.utils.calendar');
 var array = require('blear.utils.array');
 var string = require('blear.utils.string');
 var typeis = require('blear.utils.typeis');
+var time = require('blear.utils.time');
 var Template = require('blear.classes.template');
 var selector = require('blear.core.selector');
 var attribute = require('blear.core.attribute');
@@ -108,6 +109,14 @@ var DateSelect = UI.extend({
     },
 
     /**
+     * 计算排序好的日期
+     * @returns {Array}
+     */
+    getOrderedDates: function () {
+        return this[_data].orderedDateList;
+    },
+
+    /**
      * 销毁实例
      */
     destroy: function () {
@@ -184,10 +193,6 @@ pro[_initData] = function () {
         var dt = date.parse(d);
         var id = date.id(dt);
         var monthId = parseInt(id / 100);
-
-        if (index === options.active) {
-            the[_data].selectedId = id;
-        }
 
         // 隐藏当月以前
         if (options.hideNotMonth && monthId < nowMonthId) {
@@ -275,12 +280,23 @@ pro[_initData] = function () {
         }
     });
 
+    the[_data].orderedDateList = orderedDateList;
     the[_data].orderedMonthList = orderedMonthList;
     the[_data].length = orderedMonthList.length;
     the[_data].visibleIndex = foundIndex;
     the[_data].visibleYear = foundMonthDate.getFullYear();
     the[_data].visibleMonth = foundMonthDate.getMonth();
     the[_data].descArr = new Array(descLength);
+
+    var activeIndex = options.active;
+
+    if (-1 !== activeIndex) {
+        var selectedDate = orderedDateList[activeIndex];
+        the[_data].selectedId = date.id(selectedDate);
+        time.nextTick(function () {
+            the.emit('select', activeIndex, selectedDate);
+        });
+    }
 };
 
 
