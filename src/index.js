@@ -142,7 +142,8 @@ var _yearEl = DateSelect.sole();
 var _monthEl = DateSelect.sole();
 var _data = DateSelect.sole();
 var _slider = DateSelect.sole();
-var _jumpView = DateSelect.sole();
+var _activeData = DateSelect.sole();
+var _activeNode = DateSelect.sole();
 var pro = DateSelect.prototype;
 
 
@@ -189,6 +190,7 @@ pro[_initData] = function () {
         throw new TypeError('请至少指定一个日期');
     }
 
+    var orderIndex = 0;
     array.each(options.dates, function (index, d) {
         var dt = date.parse(d);
         var id = date.id(dt);
@@ -212,7 +214,7 @@ pro[_initData] = function () {
 
         candidacyMap[id] = {
             desc: desc,
-            index: index
+            index: orderIndex++
         };
         orderedDateList.push(dt);
     });
@@ -288,15 +290,7 @@ pro[_initData] = function () {
     the[_data].visibleMonth = foundMonthDate.getMonth();
     the[_data].descArr = new Array(descLength);
 
-    var activeIndex = options.active;
-
-    if (-1 !== activeIndex) {
-        var selectedDate = orderedDateList[activeIndex];
-        the[_data].selectedId = date.id(selectedDate);
-        time.nextTick(function () {
-            the.emit('select', activeIndex, selectedDate);
-        });
-    }
+    the[_activeData]();
 };
 
 
@@ -331,6 +325,9 @@ pro[_initNode] = function () {
 
     var headerHeight = layout.outerHeight(the[_headerEl]);
     attribute.style(the[_bodyEl], 'top', headerHeight);
+
+    // 激活当前状态
+    the[_activeNode]();
 };
 
 
@@ -373,9 +370,6 @@ pro[_initEvent] = function () {
 
         attribute.addClass(el, selectedClassName);
     };
-
-    // 跳转到高亮月份的对应视图
-    the[_jumpView](data.orderedMonthList);
 
     the[_slider].on('afterSlide', function (index) {
         var d = data.orderedMonthList[index];
@@ -424,17 +418,46 @@ pro[_initEvent] = function () {
 };
 
 /**
- * 跳转到对应视图
- * @param orderedMonthList
+ * 激活数据
  */
-pro[_jumpView] = function (orderedMonthList) {
+pro[_activeData] = function () {
     var the = this;
     var options = the[_options];
-    var dt = date.parse(options.dates[options.active]);
 
-    array.each(orderedMonthList, function (index, el) {
-        if (el.getFullYear() === dt.getFullYear() && el.getMonth() === dt.getMonth()) {
+    if (options.active < 0) {
+        return;
+    }
+
+    var data = the[_data];
+    var activeIndex = options.active;
+    var selectedDate = data.orderedDateList[activeIndex];
+
+    data.selectedId = date.id(selectedDate);
+    time.nextTick(function () {
+        the.emit('select', activeIndex, selectedDate);
+    });
+};
+
+
+/**
+ * 激活节点
+ */
+pro[_activeNode] = function () {
+    var the = this;
+    var options = the[_options];
+
+    if (options.active < 0) {
+        return;
+    }
+
+    var data = the[_data];
+    var activeIndex = options.active;
+    var selectedDate = data.orderedDateList[activeIndex];
+
+    array.each(data.orderedMonthList, function (index, el) {
+        if (el.getFullYear() === selectedDate.getFullYear() && el.getMonth() === selectedDate.getMonth()) {
             the[_slider].go(index);
+            return false;
         }
     });
 };
