@@ -78,10 +78,16 @@ var defaults = {
     firstDayInWeek: 0,
 
     /**
-     * 隐藏今天及以前的日期
+     * 隐藏今天以前的日期
      * @type Boolean
      */
     hideBefore: true,
+
+    /**
+     * 隐藏今天
+     * @type Boolean
+     */
+    hideToday: true,
 
     /**
      * 隐藏非本月日期
@@ -201,8 +207,13 @@ pro[_initData] = function () {
             return;
         }
 
-        // 隐藏今天以前
-        if (options.hideBefore && id <= nowId) {
+        // 隐藏今天以前, 不包括今天
+        if (options.hideBefore && id < nowId) {
+            return;
+        }
+
+        // 隐藏今天
+        if (id === nowId && options.hideToday) {
             return;
         }
 
