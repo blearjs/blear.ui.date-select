@@ -252,7 +252,7 @@ pro[_initData] = function () {
         var monthCalendar = calendar.month(year, month, {
             weeks: options.weeks,
             firstDayInWeek: options.firstDayInWeek,
-            filter: function (d) {
+            iterator: function (d) {
                 var candidacy = candidacyMap[d.id];
 
                 if (candidacy) {
