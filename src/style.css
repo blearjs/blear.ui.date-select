@@ -9,12 +9,10 @@
     .blearui-dateSelect-nav * {
       display: inline-block;
       line-height: 40px; }
-    .blearui-dateSelect-nav-prev,
-    .blearui-dateSelect-nav-next {
+    .blearui-dateSelect-nav-prev, .blearui-dateSelect-nav-next {
       width: 40px;
       text-align: center; }
-      .blearui-dateSelect-nav-prev_disabled,
-      .blearui-dateSelect-nav-next_disabled {
+      .blearui-dateSelect-nav-prev_disabled, .blearui-dateSelect-nav-next_disabled {
         opacity: 0.3; }
   .blearui-dateSelect-body-list {
     margin: 0;
