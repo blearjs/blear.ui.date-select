@@ -20,12 +20,12 @@ var time = require('blear.utils.time');
 var Template = require('blear.classes.template');
 var selector = require('blear.core.selector');
 var attribute = require('blear.core.attribute');
-var modification = require('blear.core.modification');
 var layout = require('blear.core.layout');
 var event = require('blear.core.event');
 
 var template = require('./template.html', 'html');
 
+var tpl = new Template(template);
 var namespace = UI.UI_CLASS + '-dateSelect';
 var gid = 0;
 var defaults = {
@@ -311,13 +311,8 @@ pro[_initData] = function () {
 pro[_initNode] = function () {
     var the = this;
     var options = the[_options];
-    var tpl = new Template(template, {
-        methods: {
-            range: array.range
-        },
-        options: options
-    });
 
+    the[_data].range = array.range;
     the[_containerEl].innerHTML = tpl.render(the[_data]);
     the[_headerEl] = selector.query('.' + namespace + '-header', the[_containerEl])[0];
     the[_prevEl] = selector.query('.' + namespace + '-nav-prev', the[_containerEl])[0];

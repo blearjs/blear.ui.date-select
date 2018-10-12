@@ -11,7 +11,8 @@
         <div class="blearui-dateSelect-weeks">
             <div class="blearui-dateSelect-table">
                 <div class="blearui-dateSelect-tr">
-                    <div class="blearui-dateSelect-td blearui-dateSelect-header-week" @for="item in range(0, 6)">
+                    {{#for item in range(0, 6)}}
+                    <div class="blearui-dateSelect-td blearui-dateSelect-header-week">
                         <div class="blearui-dateSelect-td-cell">
                             <div class="blearui-dateSelect-td-cell-wrap">
                                 <div class="blearui-dateSelect-td-cell-inner">
@@ -20,6 +21,7 @@
                             </div>
                         </div>
                     </div>
+                    {{/for}}
                 </div>
             </div>
         </div>
@@ -27,36 +29,59 @@
 
     <div class="blearui-dateSelect-body">
         <ul class="blearui-dateSelect-body-list">
-            <li class="blearui-dateSelect-table" @for="month in calendars">
-                <!--<div class="blearui-dateSelect-caption">{{month[1][1].year}}年{{month[1][1].month + 1}}月</div>-->
-                <div class="blearui-dateSelect-tr" @for="week in month">
-                    <div class="blearui-dateSelect-td" @class="blearui-dateSelect-td_hidden: options.hideNotMonth && date.prevMonth,
-                    blearui-dateSelect-td_hidden: options.hideNotMonth && date.nextMonth,
-                    blearui-dateSelect-td_thisMonth: date.thisMonth,
-                    blearui-dateSelect-td_prevMonth: date.prevMonth,
-                    blearui-dateSelect-td_nextMonth: date.nextMonth,
-                    blearui-dateSelect-td_candidacy: date.thisMonth && date.candidacy,
-                    blearui-dateSelect-td_selected: date.thisMonth && date.candidacy && selectedId == date.id"
-                            data-year="{{date.year}}"
-                            data-month="{{date.month}}"
-                            data-date="{{date.date}}"
-                            data-index="{{date.index}}"
-                            data-id="{{date.id}}"
-                            @for="date in week">
+            {{#for month in calendars}}
+            <li class="blearui-dateSelect-table">
+
+                {{#for week in month}}
+                <div class="blearui-dateSelect-tr">
+
+                    {{#for date in week}}
+                    <div class="
+                    blearui-dateSelect-td
+                    {{options.hideNotMonth && date.prevMonth || options.hideNotMonth && date.nextMonth? 'blearui-dateSelect-td_hidden' : ''}}
+                    {{date.thisMonth ? 'blearui-dateSelect-td_thisMonth' : ''}}
+                    {{date.prevMonth ? 'blearui-dateSelect-td_prevMonth' : ''}}
+                    {{date.nextMonth ? 'blearui-dateSelect-td_nextMonth' : ''}}
+                    {{date.thisMonth && date.candidacy ? 'blearui-dateSelect-td_candidacy' : ''}}
+                    {{date.thisMonth && date.candidacy && selectedId == date.id ? 'blearui-dateSelect-td_selected' : ''}}
+                    "
+                         data-year="{{date.year}}"
+                         data-month="{{date.month}}"
+                         data-date="{{date.date}}"
+                         data-index="{{date.index}}"
+                         data-id="{{date.id}}">
                         <div class="blearui-dateSelect-td-cell">
                             <div class="blearui-dateSelect-td-cell-wrap">
                                 <div class="blearui-dateSelect-td-cell-inner">
-                                    <div class="blearui-dateSelect-td-text blearui-dateSelect-td-text_date">{{date.date}}</div>
-                                    <div @if="date.desc" class="blearui-dateSelect-td-text blearui-dateSelect-td-text_desc" @for="item in date.desc">{{ date.thisMonth ? item : ""}}</div>
-                                    <div @if="!date.desc">
-                                        <div class="blearui-dateSelect-td-text blearui-dateSelect-td-text_desc" @for="item in descArr"></div>
+                                    <div class="blearui-dateSelect-td-text blearui-dateSelect-td-text_date">
+                                        {{date.date}}
                                     </div>
+
+                                    {{#if date.desc}}
+                                    {{#for item in date.desc}}
+                                    <div class="blearui-dateSelect-td-text blearui-dateSelect-td-text_desc">
+                                        {{date.thisMonth ? item : ""}}
+                                    </div>
+                                    {{/for}}
+                                    {{#else}}
+                                    <div>
+                                        {{#for item in descArr}}
+                                        <div class="blearui-dateSelect-td-text blearui-dateSelect-td-text_desc"></div>
+                                        {{/for}}
+                                    </div>
+                                    {{/if}}
+
                                 </div>
                             </div>
                         </div>
                     </div>
+                    {{/for}}
+
                 </div>
+                {{/for}}
+
             </li>
+            {{/for}}
         </ul>
     </div>
 </div>
