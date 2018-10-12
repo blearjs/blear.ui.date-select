@@ -44,7 +44,7 @@
       border-radius: 100%;
       border: 1px solid #e4e4e4; }
     .blearui-dateSelect-td_selected .blearui-dateSelect-td-cell-inner {
-      background: #00aa87;
+      background: #1890ff;
       color: #fff;
       border: none; }
     .blearui-dateSelect-td_selected .blearui-dateSelect-td-text_date,
@@ -75,4 +75,4 @@
         font-size: 12px;
         height: 12px;
         transform: scale(0.8);
-        color: #d5b681; }
+        color: #1890ff; }

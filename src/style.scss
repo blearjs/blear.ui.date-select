@@ -1,4 +1,5 @@
 .blearui-dateSelect {
+  $primary-color: #1890ff;
   position: relative;
   height: 100%;
   text-align: center;
@@ -81,7 +82,7 @@
     }
 
     &_selected &-cell-inner {
-      background: #00aa87;
+      background: $primary-color;
       color: #fff;
       border: none;
     }
@@ -125,7 +126,7 @@
         font-size: 12px;
         height: 12px;
         transform: scale(0.8);
-        color: #d5b681;
+        color: $primary-color;
       }
     }
   }

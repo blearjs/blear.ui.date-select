@@ -1,5 +1,4 @@
 {
-
   "name": "blear.ui.date-select",
   "version": "3.0.0",
   "description": "有限日期选择 UI",
@@ -53,7 +52,7 @@
   },
   "peerDependencies": {},
   "devDependencies": {
-
+    "coolie.js": "^2.4.1"
   },
   "license": "MIT"
 }
